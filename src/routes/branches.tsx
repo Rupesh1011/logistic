@@ -1,0 +1,119 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { PageHeader, SiteLayout } from "@/components/SiteLayout";
+import { branches as seedBranches, type Branch } from "@/data/mock";
+import { useServerDataset } from "@/hooks/use-server-dataset";
+import { Button } from "@/components/ui/button";
+import { Mail, MapPin, Phone, Truck, User } from "lucide-react";
+
+export const Route = createFileRoute("/branches")({
+  head: () => ({
+    meta: [
+      { title: "Branch Network — Trinetra Logistics" },
+      {
+        name: "description",
+        content:
+          "Vapi head office and branches in Raipur, Pune and Bhiwandi with contact details and routes served.",
+      },
+    ],
+  }),
+  component: BranchesPage,
+});
+
+function BranchesPage() {
+  const { value: branches } = useServerDataset<Branch[]>("branches", seedBranches);
+
+  return (
+    <SiteLayout>
+      <PageHeader
+        eyebrow="Branch Network"
+        title="On-ground branches in India's busiest industrial corridors"
+        subtitle="Each branch runs its own dispatch, coordination and POD operations — backed by a central platform."
+      />
+      <section className="container mx-auto px-4 py-12 grid md:grid-cols-2 gap-6">
+        {branches.map((b) => (
+          <div key={b.slug} className="border border-border rounded-xl bg-card p-6 flex flex-col">
+            <div className="flex items-start justify-between">
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="size-10 rounded-md bg-navy text-navy-foreground grid place-items-center">
+                    <MapPin className="size-5" />
+                  </span>
+                  <div>
+                    <h3 className="font-display font-bold text-xl text-navy">{b.name}</h3>
+                    <p className="text-xs text-muted-foreground">
+                      {b.city}, {b.state}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {b.isHeadOffice && (
+                <span className="font-mono text-[10px] uppercase tracking-widest bg-accent text-accent-foreground px-2 py-1 rounded">
+                  HQ
+                </span>
+              )}
+            </div>
+            <div className="mt-5 space-y-2 text-sm">
+              <p className="flex items-start gap-2 text-muted-foreground">
+                <MapPin className="size-4 mt-0.5 shrink-0" /> {b.address}
+              </p>
+              <p className="flex items-center gap-2 text-muted-foreground">
+                <User className="size-4 shrink-0" /> {b.contactPerson}
+              </p>
+              <p className="flex items-center gap-2 text-muted-foreground">
+                <Phone className="size-4 shrink-0" /> {b.phone}
+              </p>
+              <p className="flex items-center gap-2 text-muted-foreground">
+                <Mail className="size-4 shrink-0" /> {b.email}
+              </p>
+            </div>
+            <div className="mt-5 grid md:grid-cols-2 gap-4 border-t border-border pt-5">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
+                  Key Routes
+                </p>
+                <ul className="space-y-1 text-sm">
+                  {b.routes.map((r) => (
+                    <li key={r} className="flex items-center gap-2">
+                      <Truck className="size-3.5 text-accent" /> {r}
+                    </li>
+                  ))}
+                  {b.routes.length === 0 && <li className="text-xs text-muted-foreground">—</li>}
+                </ul>
+              </div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
+                  Industries
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {b.industries.map((i) => (
+                    <span
+                      key={i}
+                      className="text-xs px-2 py-1 rounded bg-secondary text-secondary-foreground"
+                    >
+                      {i}
+                    </span>
+                  ))}
+                  {b.industries.length === 0 && (
+                    <span className="text-xs text-muted-foreground">—</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            <div className="mt-6">
+              <a href={`mailto:${b.email}`}>
+                <Button className="w-full bg-navy text-navy-foreground hover:bg-navy/90">
+                  Contact This Branch
+                </Button>
+              </a>
+            </div>
+          </div>
+        ))}
+        {branches.length === 0 && (
+          <p className="md:col-span-2 text-center text-muted-foreground py-12">
+            No branches configured yet.
+          </p>
+        )}
+      </section>
+    </SiteLayout>
+  );
+}

@@ -6,7 +6,7 @@ import { Factory } from "lucide-react";
 export const Route = createFileRoute("/industries")({
   head: () => ({
     meta: [
-      { title: "Industries Served — Trinetra Logistics" },
+      { title: "Industries Served — Abhay Road Carrier" },
       {
         name: "description",
         content:

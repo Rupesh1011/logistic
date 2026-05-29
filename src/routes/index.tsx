@@ -26,13 +26,13 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Trinetra Logistics — Reliable 3PL from Vapi to Industrial India" },
+      { title: "Abhay Road Carrier — Reliable 3PL from Vapi to Industrial India" },
       {
         name: "description",
         content:
           "Branch-led 3PL road logistics across Vapi, Raipur, Pune & Bhiwandi. Live freight rate estimator and transparent transport quotes for B2B shippers.",
       },
-      { property: "og:title", content: "Trinetra Logistics — 3PL Road Logistics India" },
+      { property: "og:title", content: "Abhay Road Carrier — 3PL Road Logistics India" },
       {
         property: "og:description",
         content: "Freight rate intelligence and reliable B2B transport from Vapi.",
@@ -56,15 +56,14 @@ function HomePage() {
         />
         <div className="container mx-auto px-4 py-16 md:py-24 relative">
           <p className="font-mono text-xs uppercase tracking-widest text-accent mb-4 animate-fade-in-up">
-            3PL · Road Logistics · Pan-India
+            B2B Logistics · 18+ Years · PAN India
           </p>
           <h1 className="font-display font-bold text-4xl md:text-6xl leading-[1.05] max-w-4xl animate-fade-in-up">
-            Reliable 3PL Logistics from <span className="text-accent">Vapi</span> to Industrial
-            India.
+            Transforming Your Supply Chain with <span className="text-accent">Abhay Road Carrier</span>.
           </h1>
           <p className="mt-5 text-lg md:text-xl text-white/75 max-w-2xl animate-fade-in-up">
-            Branch-led transport solutions, freight insights, and delivery support across Vapi,
-            Raipur, Pune, and Bhiwandi.
+            18+ years of branch-led B2B logistics from Vapi, Raipur, Pune and Bhiwandi —
+            transparent, timely and flawless deliveries with 24×7 customer support.
           </p>
           <div className="mt-8 flex flex-wrap gap-3 animate-fade-in-up">
             <Link to="/freight-rates">
@@ -199,23 +198,23 @@ function HomePage() {
         <div className="container mx-auto px-4 py-20 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-accent mb-3">
-              About Trinetra
+              About Us
             </p>
             <h2 className="font-display font-bold text-3xl md:text-4xl">
-              A 3PL partner built for industrial India.
+              The future of B2B logistics in India.
             </h2>
             <p className="mt-5 text-white/75 leading-relaxed">
-              Headquartered in Vapi with on-ground branches in Raipur, Pune and Bhiwandi, we operate
-              as your extended logistics team — from spot loads to long-term lane contracts. Our
-              platform combines transparent freight, real-time intel, and rigorous POD discipline so
-              your supply chain doesn't run blind.
+              Under the leadership of Prabhashankar Upadhyay, Abhay Road Carrier has been a
+              cornerstone in goods transportation for over 18 years. From a single broker office in
+              Vapi to a four-branch operation serving clients across India, our commitment to
+              transparency, timeliness and 24×7 customer service drives everything we do.
             </p>
             <div className="mt-6 grid gap-2 text-sm text-white/80">
               {[
-                "Dedicated branch coordinators on every lane",
-                "Digital POD tracking and document trail",
-                "Industry-specific handling protocols",
-                "Transparent indicative rates before you commit",
+                "Branch coordinators in Vapi, Raipur, Pune & Bhiwandi",
+                "PTL strength across Maharashtra, Gujarat & Chhattisgarh",
+                "FTL service PAN India",
+                "500+ attached trucks · 15 own trucks · 18 fixed drivers",
               ].map((p) => (
                 <p key={p} className="flex items-start gap-2">
                   <CheckCircle2 className="size-4 text-accent mt-0.5" /> {p}
@@ -232,10 +231,10 @@ function HomePage() {
           </div>
           <div className="grid grid-cols-2 gap-4">
             {[
-              { v: "12+", l: "Years moving industrial India" },
-              { v: "4", l: "Owned branch operations" },
-              { v: "180+", l: "Vetted vehicle partners" },
-              { v: "24×7", l: "Branch coordination" },
+              { v: "18+", l: "Years in logistics" },
+              { v: "4", l: "Owned branches" },
+              { v: "500+", l: "Attached trucks" },
+              { v: "24×7", l: "Customer service" },
             ].map((s) => (
               <RevealCard key={s.l} className="rounded-xl bg-white/5 border border-white/10 p-6">
                 <p className="font-display text-3xl font-bold text-accent">{s.v}</p>

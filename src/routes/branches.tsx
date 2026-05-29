@@ -3,12 +3,13 @@ import { PageHeader, SiteLayout } from "@/components/SiteLayout";
 import { branches as seedBranches, type Branch } from "@/data/mock";
 import { useServerDataset } from "@/hooks/use-server-dataset";
 import { Button } from "@/components/ui/button";
-import { Mail, MapPin, Phone, Truck, User } from "lucide-react";
+import { Mail, MapPin, MessageCircle, Phone, Truck, User } from "lucide-react";
+import { buildBranchWhatsAppLink } from "@/lib/whatsapp";
 
 export const Route = createFileRoute("/branches")({
   head: () => ({
     meta: [
-      { title: "Branch Network — Trinetra Logistics" },
+      { title: "Branch Network — Abhay Road Carrier" },
       {
         name: "description",
         content:
@@ -100,9 +101,13 @@ function BranchesPage() {
               </div>
             </div>
             <div className="mt-6">
-              <a href={`mailto:${b.email}`}>
-                <Button className="w-full bg-navy text-navy-foreground hover:bg-navy/90">
-                  Contact This Branch
+              <a
+                href={buildBranchWhatsAppLink({ branchPhone: b.phone, branchCity: b.city })}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="w-full bg-[#25D366] text-white hover:bg-[#1ebe5d]">
+                  <MessageCircle className="size-4 mr-1" /> Chat on WhatsApp
                 </Button>
               </a>
             </div>

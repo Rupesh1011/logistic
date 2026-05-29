@@ -5,11 +5,11 @@ import { CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us — Trinetra Logistics" },
+      { title: "About Us — Abhay Road Carrier" },
       {
         name: "description",
         content:
-          "Trinetra Logistics is a Vapi-based 3PL road logistics company with branches across Raipur, Pune and Bhiwandi.",
+          "Abhay Road Carrier is a Vapi-headquartered B2B logistics company with 18+ years of experience and branches in Raipur, Pune and Bhiwandi.",
       },
     ],
   }),
@@ -19,9 +19,9 @@ export const Route = createFileRoute("/about")({
 const pillars = [
   "Branch-level coordination on every consignment",
   "Digital POD support and document trail",
-  "Delivery tracking with proactive ETA updates",
+  "24×7 customer service and proactive ETA updates",
   "Vehicle vetting and driver compliance",
-  "Industry-specific protocols (chemicals, steel, FMCG)",
+  "Industry-specific protocols (chemicals, steel, FMCG, welding)",
   "Transparent indicative pricing before commitment",
 ];
 
@@ -29,34 +29,39 @@ function AboutPage() {
   return (
     <SiteLayout>
       <PageHeader
-        eyebrow="About Trinetra"
-        title="A 3PL logistics firm built around branch-level accountability"
-        subtitle="Founded in Vapi, we operate as your extended logistics team across India's most demanding industrial corridors."
+        eyebrow="About Us"
+        title="A B2B logistics partner built around 18+ years of on-ground execution"
+        subtitle="Headquartered in Vapi with branches in Raipur, Pune and Bhiwandi, Abhay Road Carrier serves a diverse range of clients across India."
       />
       <section className="container mx-auto px-4 py-12 grid md:grid-cols-2 gap-12">
         <div className="space-y-5 text-muted-foreground leading-relaxed">
           <p>
-            Trinetra Logistics is a third-party (3PL) road logistics company headquartered in Vapi,
-            Gujarat, with operating branches in{" "}
-            <strong className="text-navy">Raipur, Pune and Bhiwandi</strong>. We move full and
-            partial truckloads for manufacturers, traders and distributors across India's most
-            active industrial hubs.
+            Abhay Road Carrier, under the leadership of director and owner{" "}
+            <strong className="text-navy">Prabhashankar Upadhyay</strong>, has been a cornerstone
+            in the goods transportation industry for over 18 years. Initially, Prabhashankar
+            started as a broker, seamlessly connecting clients and transporters and consistently
+            delivering outstanding service.
           </p>
           <p>
-            Our edge isn't a software demo — it's{" "}
-            <strong className="text-navy">on-ground execution</strong>. Each branch is staffed with
-            experienced coordinators who own loading, transit, in-route issue resolution and POD
-            discipline. Our central platform stitches their work together into one transparent view
-            for you.
+            His expertise and dedication have propelled Abhay Road Carrier to new heights,
+            transforming it into a premier logistics provider. Today, we proudly serve a diverse
+            range of clients, ensuring end-to-end logistics solutions that are{" "}
+            <strong className="text-navy">transparent, timely, and flawless</strong>. Our
+            commitment to 24/7 customer service underscores our dedication to meeting and
+            exceeding our clients' expectations.
           </p>
           <p>
-            We invest in the boring but essential things — vehicle vetting, driver compliance,
-            weighbridge documentation, POD digitization, diesel-adjusted lane pricing — so your
-            supply chain doesn't carry hidden risk.
+            Logistics is a critical component of every company's operations, and at Abhay Road
+            Carrier, we aim to simplify this process with innovative solutions. Our dedicated team
+            is bound by a commitment to excellence, ensuring that your logistics needs are met
+            with the highest standards of quality and reliability.
+          </p>
+          <p className="font-mono text-xs uppercase tracking-widest text-accent">
+            GST · 24AARPU0311R1Z7
           </p>
         </div>
         <div className="rounded-2xl bg-navy text-navy-foreground p-8">
-          <p className="font-mono text-xs uppercase tracking-widest text-accent">What we do</p>
+          <p className="font-mono text-xs uppercase tracking-widest text-accent">Why choose us</p>
           <h2 className="font-display font-bold text-2xl mt-2">
             Reliable execution, not just promises.
           </h2>

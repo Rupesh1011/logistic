@@ -7,7 +7,7 @@ import { CheckCircle2, Package } from "lucide-react";
 export const Route = createFileRoute("/deliveries")({
   head: () => ({
     meta: [
-      { title: "Delivery Success — Trinetra Logistics" },
+      { title: "Delivery Success — Abhay Road Carrier" },
       {
         name: "description",
         content:

@@ -19,7 +19,7 @@ const searchSchema = z.object({
 });
 
 export const Route = createFileRoute("/login")({
-  head: () => ({ meta: [{ title: "Admin Login — Trinetra Logistics" }] }),
+  head: () => ({ meta: [{ title: "Admin Login — Abhay Road Carrier" }] }),
   validateSearch: searchSchema,
   component: LoginPage,
 });

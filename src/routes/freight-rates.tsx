@@ -25,7 +25,7 @@ import { CheckCircle2, Lock, Search } from "lucide-react";
 export const Route = createFileRoute("/freight-rates")({
   head: () => ({
     meta: [
-      { title: "Freight Rate Dashboard — Trinetra Logistics" },
+      { title: "Freight Rate Dashboard — Abhay Road Carrier" },
       {
         name: "description",
         content:

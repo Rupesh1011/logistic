@@ -20,7 +20,7 @@ import { emailJsConfigured, sendLeadEmail } from "@/lib/emailjs";
 export const Route = createFileRoute("/get-quote")({
   head: () => ({
     meta: [
-      { title: "Get Transport Quote — Trinetra Logistics" },
+      { title: "Get Transport Quote — Abhay Road Carrier" },
       {
         name: "description",
         content:

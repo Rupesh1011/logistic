@@ -22,7 +22,7 @@ import {
 import { LogOut } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin Panel — Trinetra Logistics" }] }),
+  head: () => ({ meta: [{ title: "Admin Panel — Abhay Road Carrier" }] }),
   component: AdminPage,
 });
 

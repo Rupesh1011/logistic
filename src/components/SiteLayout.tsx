@@ -2,6 +2,7 @@ import { ReactNode, useEffect } from "react";
 import { LogisticsTicker } from "./LogisticsTicker";
 import { SiteHeader } from "./SiteHeader";
 import { SiteFooter } from "./SiteFooter";
+import { WhatsAppFab } from "./WhatsAppFab";
 import { Toaster } from "@/components/ui/sonner";
 import { clearLegacyAuthKeys, migrateLegacyQuotes } from "@/lib/leads";
 
@@ -19,6 +20,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
       <SiteHeader />
       <main className="flex-1">{children}</main>
       <SiteFooter />
+      <WhatsAppFab />
       <Toaster richColors position="top-right" />
     </div>
   );

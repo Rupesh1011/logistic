@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Truck } from "lucide-react";
+import { MessageCircle, Truck } from "lucide-react";
+import { buildBranchWhatsAppLink } from "@/lib/whatsapp";
 
 export function SiteFooter() {
   return (
@@ -10,11 +11,14 @@ export function SiteFooter() {
             <span className="size-9 rounded-md bg-accent text-accent-foreground grid place-items-center">
               <Truck className="size-5" />
             </span>
-            Trinetra Logistics
+            Abhay Road Carrier
           </div>
           <p className="mt-4 text-sm text-white/70 leading-relaxed">
-            Reliable 3PL road logistics from Vapi to industrial India. Branch-led operations,
-            transparent freight, on-time delivery.
+            Reliable B2B road logistics from Vapi to industrial India. 18+ years of branch-led
+            operations, transparent freight, on-time delivery.
+          </p>
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-widest text-white/50">
+            GST · 24AARPU0311R1Z7
           </p>
         </div>
         <div>
@@ -60,23 +64,33 @@ export function SiteFooter() {
         <div>
           <h4 className="font-semibold mb-3">Head Office</h4>
           <p className="text-sm text-white/70 leading-relaxed">
-            Plot 12, GIDC Industrial Estate,
+            Plot no.10, Param Industrial Hub,
             <br />
-            Vapi, Gujarat 396195
+            opposite Evershine Industrial Park,
             <br />
-            <a href="tel:+919800000001" className="hover:text-accent">
-              +91 98XXXXXX01
+            Karvad Road, Karvad, Vapi 396193
+            <br />
+            <a href="tel:+919429008362" className="hover:text-accent">
+              +91 94290-08362
             </a>
             <br />
-            <a href="mailto:vapi@trinetralogistics.in" className="hover:text-accent">
-              vapi@trinetralogistics.in
+            <a href="mailto:arcvapi62@gmail.com" className="hover:text-accent">
+              arcvapi62@gmail.com
             </a>
           </p>
+          <a
+            href={buildBranchWhatsAppLink({ branchPhone: "+91 80942-25674", branchCity: "head office" })}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#25D366] hover:text-white"
+          >
+            <MessageCircle className="size-4" /> Chat on WhatsApp
+          </a>
         </div>
       </div>
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-white/50">
-          <p>© {new Date().getFullYear()} Trinetra Logistics Pvt. Ltd. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Abhay Road Carrier. All rights reserved.</p>
           <p>Vapi · Raipur · Pune · Bhiwandi</p>
         </div>
       </div>

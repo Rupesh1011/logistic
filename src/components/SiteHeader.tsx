@@ -27,7 +27,7 @@ export function SiteHeader() {
           <span className="size-9 rounded-md bg-navy text-navy-foreground grid place-items-center">
             <Truck className="size-5" />
           </span>
-          Trinetra Logistics
+          Abhay Road Carrier
         </Link>
         <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
           {nav.map((n) => (

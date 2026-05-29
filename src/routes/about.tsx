@@ -37,24 +37,24 @@ function AboutPage() {
         <div className="space-y-5 text-muted-foreground leading-relaxed">
           <p>
             Abhay Road Carrier, under the leadership of director and owner{" "}
-            <strong className="text-navy">Prabhashankar Upadhyay</strong>, has been a cornerstone
-            in the goods transportation industry for over 18 years. Initially, Prabhashankar
-            started as a broker, seamlessly connecting clients and transporters and consistently
-            delivering outstanding service.
+            <strong className="text-navy">Prabhashankar Upadhyay</strong>, has been a cornerstone in
+            the goods transportation industry for over 18 years. Initially, Prabhashankar started as
+            a broker, seamlessly connecting clients and transporters and consistently delivering
+            outstanding service.
           </p>
           <p>
             His expertise and dedication have propelled Abhay Road Carrier to new heights,
             transforming it into a premier logistics provider. Today, we proudly serve a diverse
             range of clients, ensuring end-to-end logistics solutions that are{" "}
-            <strong className="text-navy">transparent, timely, and flawless</strong>. Our
-            commitment to 24/7 customer service underscores our dedication to meeting and
-            exceeding our clients' expectations.
+            <strong className="text-navy">transparent, timely, and flawless</strong>. Our commitment
+            to 24/7 customer service underscores our dedication to meeting and exceeding our
+            clients' expectations.
           </p>
           <p>
             Logistics is a critical component of every company's operations, and at Abhay Road
             Carrier, we aim to simplify this process with innovative solutions. Our dedicated team
-            is bound by a commitment to excellence, ensuring that your logistics needs are met
-            with the highest standards of quality and reliability.
+            is bound by a commitment to excellence, ensuring that your logistics needs are met with
+            the highest standards of quality and reliability.
           </p>
           <p className="font-mono text-xs uppercase tracking-widest text-accent">
             GST · 24AARPU0311R1Z7

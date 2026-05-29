@@ -10,7 +10,7 @@
 
 import { createServerFn } from "@tanstack/react-start";
 
-const DATASETS = ["freight-rates", "branches", "deliveries"] as const;
+const DATASETS = ["freight-rates", "branches", "deliveries", "blog-posts"] as const;
 export type DatasetName = (typeof DATASETS)[number];
 
 const KV_KEY = (name: DatasetName) => `trinetra:${name}`;
@@ -22,10 +22,8 @@ async function getKv(): Promise<{
   set: (key: string, value: unknown) => Promise<unknown>;
 } | null> {
   // Upstash Redis (used via Vercel's Upstash integration) injects these two vars.
-  const url =
-    process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
-  const token =
-    process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
+  const url = process.env.UPSTASH_REDIS_REST_URL ?? process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN ?? process.env.KV_REST_API_TOKEN;
   if (!url || !token) return null;
   try {
     const { Redis } = await import("@upstash/redis");

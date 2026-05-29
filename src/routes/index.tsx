@@ -10,10 +10,12 @@ import {
   trustMetrics,
   type Branch,
 } from "@/data/mock";
+import { seedBlogPosts, type BlogPost } from "@/data/blog";
 import { useServerDataset } from "@/hooks/use-server-dataset";
 import { useParallax } from "@/lib/motion";
 import {
   ArrowRight,
+  Calendar,
   CheckCircle2,
   Factory,
   Gauge,
@@ -59,7 +61,8 @@ function HomePage() {
             B2B Logistics · 18+ Years · PAN India
           </p>
           <h1 className="font-display font-bold text-4xl md:text-6xl leading-[1.05] max-w-4xl animate-fade-in-up">
-            Transforming Your Supply Chain with <span className="text-accent">Abhay Road Carrier</span>.
+            Transforming Your Supply Chain with{" "}
+            <span className="text-accent">Abhay Road Carrier</span>.
           </h1>
           <p className="mt-5 text-lg md:text-xl text-white/75 max-w-2xl animate-fade-in-up">
             18+ years of branch-led B2B logistics from Vapi, Raipur, Pune and Bhiwandi —
@@ -197,9 +200,7 @@ function HomePage() {
       <section className="bg-navy text-navy-foreground">
         <div className="container mx-auto px-4 py-20 grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <p className="font-mono text-xs uppercase tracking-widest text-accent mb-3">
-              About Us
-            </p>
+            <p className="font-mono text-xs uppercase tracking-widest text-accent mb-3">About Us</p>
             <h2 className="font-display font-bold text-3xl md:text-4xl">
               The future of B2B logistics in India.
             </h2>
@@ -262,6 +263,8 @@ function HomePage() {
         </div>
       </section>
 
+      <LatestBlogPosts />
+
       {/* CTA */}
       <section className="container mx-auto px-4 pb-20">
         <div className="rounded-2xl bg-gradient-to-br from-navy to-navy/80 text-navy-foreground p-10 md:p-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
@@ -321,5 +324,88 @@ function Capability({
         <p className="text-sm text-muted-foreground mt-1.5">{desc}</p>
       </div>
     </div>
+  );
+}
+
+function LatestBlogPosts() {
+  const { value: posts } = useServerDataset<BlogPost[]>("blog-posts", seedBlogPosts);
+  const latest = posts
+    .slice()
+    .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
+    .slice(0, 3);
+
+  if (latest.length === 0) return null;
+
+  return (
+    <section className="bg-secondary/40 border-y border-border">
+      <div className="container mx-auto px-4 py-20">
+        <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
+          <div className="max-w-2xl">
+            <p className="font-mono text-xs uppercase tracking-widest text-accent mb-2">
+              Latest from the Blog
+            </p>
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-navy">
+              Logistics insights and industry notes
+            </h2>
+          </div>
+          <Link to="/blog">
+            <Button variant="outline">
+              View all posts <ArrowRight className="size-4 ml-1" />
+            </Button>
+          </Link>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {latest.map((post) => (
+            <Link
+              key={post.id}
+              to="/blog/$slug"
+              params={{ slug: post.slug }}
+              className="group border border-border rounded-xl bg-card overflow-hidden hover:border-accent transition-all flex flex-col"
+            >
+              {post.coverImage ? (
+                <div className="aspect-[16/9] overflow-hidden bg-secondary">
+                  <img
+                    src={post.coverImage}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <div className="aspect-[16/9] bg-gradient-to-br from-navy to-navy/70 grid place-items-center text-accent">
+                  <Truck className="size-10" />
+                </div>
+              )}
+              <div className="p-6 flex-1 flex flex-col">
+                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                  <span className="inline-flex items-center gap-1">
+                    <Calendar className="size-3" />
+                    {new Date(post.publishedAt).toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "short",
+                      year: "numeric",
+                    })}
+                  </span>
+                  {post.tags.slice(0, 1).map((t) => (
+                    <span key={t} className="font-mono uppercase tracking-widest text-accent">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="font-display font-bold text-lg text-navy mt-3 group-hover:text-accent transition-colors">
+                  {post.title}
+                </h3>
+                <p className="text-sm text-muted-foreground mt-2 flex-1 line-clamp-3">
+                  {post.excerpt}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy group-hover:text-accent">
+                  Read post <ArrowRight className="size-3.5" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

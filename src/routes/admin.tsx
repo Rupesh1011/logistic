@@ -7,6 +7,7 @@ import { AdminLeadsTab } from "@/components/admin/AdminLeadsTab";
 import { AdminFreightRatesTab } from "@/components/admin/AdminFreightRatesTab";
 import { AdminBranchesTab } from "@/components/admin/AdminBranchesTab";
 import { AdminDeliveriesTab } from "@/components/admin/AdminDeliveriesTab";
+import { AdminBlogTab } from "@/components/admin/AdminBlogTab";
 import { useAdminAuth } from "@/hooks/use-admin-auth";
 import { useServerDataset } from "@/hooks/use-server-dataset";
 import { STORAGE_KEYS } from "@/lib/storage";
@@ -105,6 +106,7 @@ function AdminPage() {
             <TabsTrigger value="rates">Freight Rates</TabsTrigger>
             <TabsTrigger value="branches">Branches</TabsTrigger>
             <TabsTrigger value="stories">Delivery Stories</TabsTrigger>
+            <TabsTrigger value="blog">Blog</TabsTrigger>
           </TabsList>
 
           <TabsContent value="leads" className="mt-6">
@@ -118,6 +120,9 @@ function AdminPage() {
           </TabsContent>
           <TabsContent value="stories" className="mt-6">
             <AdminDeliveriesTab />
+          </TabsContent>
+          <TabsContent value="blog" className="mt-6">
+            <AdminBlogTab />
           </TabsContent>
         </Tabs>
 

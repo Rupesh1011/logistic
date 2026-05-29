@@ -15,7 +15,17 @@ import { getRevealState } from "@/lib/leads";
 import { useServerDataset } from "@/hooks/use-server-dataset";
 import { freightRates as seedRates, type FreightRate } from "@/data/mock";
 
-const cities = ["Vapi", "Pune", "Bhiwandi", "Raipur", "Mumbai", "Surat", "Ahmedabad", "Nagpur", "Delhi"];
+const cities = [
+  "Vapi",
+  "Pune",
+  "Bhiwandi",
+  "Raipur",
+  "Mumbai",
+  "Surat",
+  "Ahmedabad",
+  "Nagpur",
+  "Delhi",
+];
 const vehicles = ["14ft Truck", "20ft Container", "32ft SXL", "32ft MXL", "Trailer 40ft"];
 const packaging = ["Loose", "Pallet", "Drum", "Crate", "Bag"];
 const categories = ["General", "Chemicals", "FMCG", "Steel", "Engineering Goods", "Textiles"];
@@ -24,16 +34,19 @@ type EstimateState =
   | { matched: true; perTon: number; low: number; high: number }
   | { matched: false; perTon: number; low: number; high: number };
 
-function findRate(rates: FreightRate[], from: string, to: string, vehicle: string): FreightRate | null {
+function findRate(
+  rates: FreightRate[],
+  from: string,
+  to: string,
+  vehicle: string,
+): FreightRate | null {
   const f = from.trim().toLowerCase();
   const t = to.trim().toLowerCase();
   const v = vehicle.trim().toLowerCase();
   return (
     rates.find(
       (r) =>
-        r.from.toLowerCase() === f &&
-        r.to.toLowerCase() === t &&
-        r.vehicle.toLowerCase() === v,
+        r.from.toLowerCase() === f && r.to.toLowerCase() === t && r.vehicle.toLowerCase() === v,
     ) ?? null
   );
 }
@@ -106,7 +119,9 @@ export function FreightEstimator() {
         <Calculator className="size-5 text-accent" />
         <div>
           <h3 className="font-display font-bold text-lg leading-tight">Freight Rate Estimator</h3>
-          <p className="text-xs text-white/60">Instant indicative pricing across our branch network</p>
+          <p className="text-xs text-white/60">
+            Instant indicative pricing across our branch network
+          </p>
         </div>
       </div>
       <div className="p-6 grid gap-4 md:grid-cols-3">
@@ -139,7 +154,11 @@ export function FreightEstimator() {
           </Select>
         </Field>
         <Field label="Material Weight (tons)">
-          <Input type="number" value={form.weight} onChange={(e) => handle("weight", e.target.value)} />
+          <Input
+            type="number"
+            value={form.weight}
+            onChange={(e) => handle("weight", e.target.value)}
+          />
         </Field>
         <Field label="Packaging Type">
           <Select value={form.packaging} onValueChange={(v) => handle("packaging", v)}>
@@ -187,7 +206,10 @@ export function FreightEstimator() {
           <Input type="date" value={form.date} onChange={(e) => handle("date", e.target.value)} />
         </Field>
         <div className="md:col-span-2 flex items-end">
-          <Button onClick={calculate} className="w-full bg-accent text-accent-foreground hover:bg-accent/90 h-10">
+          <Button
+            onClick={calculate}
+            className="w-full bg-accent text-accent-foreground hover:bg-accent/90 h-10"
+          >
             Get Indicative Rate <ArrowRight className="size-4 ml-1" />
           </Button>
         </div>
@@ -205,10 +227,12 @@ export function FreightEstimator() {
                 estimate.matched ? (
                   <>
                     <p className="font-display text-3xl font-bold text-navy mt-1">
-                      ₹{estimate.low.toLocaleString("en-IN")} – ₹{estimate.high.toLocaleString("en-IN")}
+                      ₹{estimate.low.toLocaleString("en-IN")} – ₹
+                      {estimate.high.toLocaleString("en-IN")}
                     </p>
                     <p className="text-xs text-muted-foreground mt-1">
-                      ~₹{estimate.perTon.toLocaleString("en-IN")}/ton · subject to diesel, tolls, route conditions.
+                      ~₹{estimate.perTon.toLocaleString("en-IN")}/ton · subject to diesel, tolls,
+                      route conditions.
                     </p>
                   </>
                 ) : (
@@ -218,8 +242,9 @@ export function FreightEstimator() {
                       Custom route — quote on the way
                     </p>
                     <p className="text-sm text-muted-foreground mt-1">
-                      We don't have a published rate for {form.from} → {form.to} in a {form.vehicle}. Our branch
-                      coordinator will email you a tailored quote within 2 working hours.
+                      We don't have a published rate for {form.from} → {form.to} in a {form.vehicle}
+                      . Our branch coordinator will email you a tailored quote within 2 working
+                      hours.
                     </p>
                   </div>
                 )
@@ -229,7 +254,8 @@ export function FreightEstimator() {
                     aria-hidden="true"
                     className="font-display text-3xl font-bold text-navy mt-1 select-none blur-md"
                   >
-                    ₹{estimate.low.toLocaleString("en-IN")} – ₹{estimate.high.toLocaleString("en-IN")}
+                    ₹{estimate.low.toLocaleString("en-IN")} – ₹
+                    {estimate.high.toLocaleString("en-IN")}
                   </p>
                   <span className="sr-only">
                     Indicative rate hidden. Submit the lead form to view.
@@ -288,7 +314,9 @@ export function FreightEstimator() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div className="grid gap-1.5">
-      <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">{label}</Label>
+      <Label className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
+        {label}
+      </Label>
       {children}
     </div>
   );

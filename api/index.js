@@ -9,7 +9,8 @@ import server from "./_server/server.js";
 export default async function handler(req, res) {
   try {
     const protocol =
-      (req.headers["x-forwarded-proto"] && String(req.headers["x-forwarded-proto"]).split(",")[0]) ||
+      (req.headers["x-forwarded-proto"] &&
+        String(req.headers["x-forwarded-proto"]).split(",")[0]) ||
       "https";
     const host = req.headers.host || "localhost";
     const url = new URL(req.url || "/", `${protocol}://${host}`);

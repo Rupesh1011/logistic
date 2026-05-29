@@ -79,7 +79,10 @@ export function SiteFooter() {
             </a>
           </p>
           <a
-            href={buildBranchWhatsAppLink({ branchPhone: "+91 80942-25674", branchCity: "head office" })}
+            href={buildBranchWhatsAppLink({
+              branchPhone: "+91 80942-25674",
+              branchCity: "head office",
+            })}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#25D366] hover:text-white"

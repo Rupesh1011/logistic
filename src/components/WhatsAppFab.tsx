@@ -1,7 +1,8 @@
 import { MessageCircle } from "lucide-react";
-import { buildWhatsAppLink, getDefaultWhatsAppNumber } from "@/lib/whatsapp";
+import { buildDefaultWhatsAppLink } from "@/lib/whatsapp";
 
-const DEFAULT_MESSAGE = "Hi, I'd like to enquire about Abhay Road Carrier's logistics services.";
+const DEFAULT_MESSAGE =
+  "Hi, I'd like to enquire about logistics service for our company. Could you please share more details?";
 
 /**
  * Bottom-right WhatsApp button shown on every page. Pre-fills a friendly
@@ -9,8 +10,8 @@ const DEFAULT_MESSAGE = "Hi, I'd like to enquire about Abhay Road Carrier's logi
  * (third-party auto-send is intentionally blocked by WhatsApp).
  */
 export function WhatsAppFab() {
-  const number = getDefaultWhatsAppNumber();
-  const href = buildWhatsAppLink(number, DEFAULT_MESSAGE);
+  void DEFAULT_MESSAGE; // used in buildDefaultWhatsAppLink internally
+  const href = buildDefaultWhatsAppLink();
   return (
     <a
       href={href}

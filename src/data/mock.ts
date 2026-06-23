@@ -23,10 +23,15 @@ export const branches: Branch[] = [
     isHeadOffice: true,
     address:
       "Plot no.10, Param Industrial Hub, opposite Evershine Industrial Park, Karvad Road, Karvad, Vapi 396193",
-    contactPerson: "Shubham Upadhyay / Prabhashankar Upadhyay",
+    contactPerson: "Prabhashankar Upadhyay / Shubham Upadhyay",
     phone: "+91 94290-08362",
-    email: "arcvapi62@gmail.com",
-    routes: ["Vapi → Pune", "Vapi → Bhiwandi", "Vapi → Raipur", "Vapi → Delhi"],
+    email: "office@abhayroadcarrier.in",
+    routes: [
+      "Head Office & Control Tower",
+      "24/7 Operations Monitoring",
+      "Customer Support Desk",
+      "Freight Planning & Coordination",
+    ],
     industries: ["Chemicals", "Welding", "Paper", "Rubber", "Engineering Goods", "Textiles"],
   },
   {
@@ -37,8 +42,13 @@ export const branches: Branch[] = [
     address: "Block No. 7, Parking No. 3, Transport Nagar, Rawabhata, Raipur (C.G.) 493221",
     contactPerson: "Nishakant Pathak",
     phone: "+91 81888-87362",
-    email: "arcvapi62@gmail.com",
-    routes: ["Raipur → Vapi", "Raipur → Pune", "Raipur → Nagpur"],
+    email: "office@abhayroadcarrier.in",
+    routes: [
+      "Central India Hub",
+      "Industrial Cargo Experts",
+      "Regional Dispatch Team",
+      "Fast POD Processing",
+    ],
     industries: ["Steel & Fabrication", "Minerals", "Construction Equipment", "FMCG"],
   },
   {
@@ -50,8 +60,13 @@ export const branches: Branch[] = [
       "Shop No. 2, Gate No. 57, Dehu-Alandi Road, Opp. Gulmohar Compound, Talawade, Pune (MH) 411062",
     contactPerson: "Kuldeep Mishra",
     phone: "+91 94263-95222",
-    email: "arcvapi62@gmail.com",
-    routes: ["Pune → Vapi", "Pune → Raipur", "Pune → Bhiwandi"],
+    email: "office@abhayroadcarrier.in",
+    routes: [
+      "Manufacturing Corridor Coverage",
+      "Dedicated Local Operations Team",
+      "Daily Vehicle Placement",
+      "Warehouse Coordination",
+    ],
     industries: ["Manufacturing", "Engineering Goods", "FMCG", "Construction Equipment"],
   },
   {
@@ -63,8 +78,13 @@ export const branches: Branch[] = [
       "House No. 142/A, Godown No. 5, near U.P Dhaba & Sumit Logistic Park, Village Borivali (Kukse), Post Amne, Bhiwandi 421320",
     contactPerson: "Vishal Upadhyay",
     phone: "+91 96217-77284",
-    email: "arcvapi62@gmail.com",
-    routes: ["Bhiwandi → Vapi", "Bhiwandi → Pune", "Bhiwandi → Surat"],
+    email: "office@abhayroadcarrier.in",
+    routes: [
+      "Warehousing & Distribution Hub",
+      "Mumbai & NCR Connectivity",
+      "Consolidation Services",
+      "Last-Mile Dispatch Support",
+    ],
     industries: ["FMCG", "Textiles", "Industrial Supplies", "Welding"],
   },
 ];

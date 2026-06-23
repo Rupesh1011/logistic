@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { MessageCircle, Truck } from "lucide-react";
-import { buildBranchWhatsAppLink } from "@/lib/whatsapp";
+import { MessageCircle } from "lucide-react";
+import { buildDefaultWhatsAppLink } from "@/lib/whatsapp";
 
 export function SiteFooter() {
   return (
@@ -8,8 +8,15 @@ export function SiteFooter() {
       <div className="container mx-auto px-4 py-14 grid gap-10 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2 font-display font-bold text-lg">
-            <span className="size-9 rounded-md bg-accent text-accent-foreground grid place-items-center">
-              <Truck className="size-5" />
+            <span className="h-14 w-auto rounded-xl overflow-hidden flex items-center bg-white p-0.5">
+              <img
+                src="/arc-logo.png"
+                alt="ARC"
+                className="h-full w-auto object-contain"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = "none";
+                }}
+              />
             </span>
             Abhay Road Carrier
           </div>
@@ -70,19 +77,21 @@ export function SiteFooter() {
             <br />
             Karvad Road, Karvad, Vapi 396193
             <br />
+            {/* Primary number first */}
+            <a href="tel:+919033012792" className="hover:text-accent font-semibold">
+              +91 90330 12792
+            </a>
+            <br />
             <a href="tel:+919429008362" className="hover:text-accent">
               +91 94290-08362
             </a>
             <br />
-            <a href="mailto:arcvapi62@gmail.com" className="hover:text-accent">
-              arcvapi62@gmail.com
+            <a href="mailto:business@abhayroadcarrier.in" className="hover:text-accent">
+              business@abhayroadcarrier.in
             </a>
           </p>
           <a
-            href={buildBranchWhatsAppLink({
-              branchPhone: "+91 80942-25674",
-              branchCity: "head office",
-            })}
+            href={buildDefaultWhatsAppLink()}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[#25D366] hover:text-white"

@@ -102,7 +102,7 @@ function BranchesPage() {
             </div>
             <div className="mt-6">
               <a
-                href={buildBranchWhatsAppLink({ branchPhone: b.phone, branchCity: b.city })}
+                href={buildBranchWhatsAppLink({ branchCity: b.city })}
                 target="_blank"
                 rel="noopener noreferrer"
               >

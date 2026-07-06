@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { PageHeader, SiteLayout } from "@/components/SiteLayout";
 import { LeadCaptureDialog } from "@/components/LeadCaptureDialog";
 import { Button } from "@/components/ui/button";
@@ -12,15 +12,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import {
-  freightRates as seedRates,
-  branches as seedBranches,
-  type Branch,
-  type FreightRate,
-} from "@/data/mock";
+import { freightRates as seedRates, type FreightRate } from "@/data/mock";
 import { useServerDataset } from "@/hooks/use-server-dataset";
 import { getRevealState } from "@/lib/leads";
-import { CheckCircle2, Lock, Search } from "lucide-react";
+import { CheckCircle2, ChevronDown, Lock, Search, X } from "lucide-react";
 
 export const Route = createFileRoute("/freight-rates")({
   head: () => ({
@@ -29,7 +24,7 @@ export const Route = createFileRoute("/freight-rates")({
       {
         name: "description",
         content:
-          "Indicative freight charges across Vapi, Pune, Bhiwandi and Raipur with diesel-impact and live updates.",
+          "Indicative freight charges across Vapi, Pune, Bhiwandi and Raipur with live updates.",
       },
     ],
   }),
@@ -39,9 +34,25 @@ export const Route = createFileRoute("/freight-rates")({
 const trucks = ["All", "14ft Truck", "20ft Container", "32ft SXL", "32ft MXL", "Trailer 40ft"];
 const loadTypes = ["All", "FTL", "PTL"];
 
+// Comprehensive list of Indian cities for the city search dropdowns.
+const INDIAN_CITIES = [
+  "All",
+  "Agra","Ahmedabad","Ajmer","Aligarh","Allahabad","Amravati","Amritsar","Asansol",
+  "Aurangabad","Bangalore","Bareilly","Belgaum","Bhavnagar","Bhilai","Bhiwandi",
+  "Bhopal","Bhubaneswar","Bikaner","Bilaspur","Bokaro","Chandigarh","Chennai",
+  "Coimbatore","Cuttack","Dehradun","Delhi","Dhanbad","Durgapur","Erode","Faridabad",
+  "Firozabad","Ghaziabad","Gorakhpur","Gulbarga","Guntur","Gurgaon","Guwahati",
+  "Gwalior","Hubli","Hyderabad","Indore","Jabalpur","Jaipur","Jalandhar","Jammu",
+  "Jamnagar","Jamshedpur","Jhansi","Jodhpur","Kakinada","Kalyan","Kanpur","Kochi",
+  "Kota","Kozhikode","Kolkata","Lucknow","Ludhiana","Madurai","Meerut","Mumbai",
+  "Mysore","Nagpur","Nashik","Navi Mumbai","Nellore","Noida","Patna","Pimpri",
+  "Pune","Raipur","Rajkot","Ranchi","Salem","Sangli","Siliguri","Solapur","Srinagar",
+  "Surat","Thane","Tiruchirappalli","Tirunelveli","Tiruppur","Ujjain","Vadodara",
+  "Varanasi","Vapi","Vijayawada","Visakhapatnam","Warangal",
+];
+
 function FreightRatesPage() {
   const { value: rates } = useServerDataset<FreightRate[]>("freight-rates", seedRates);
-  const { value: branches } = useServerDataset<Branch[]>("branches", seedBranches);
 
   const [revealed, setRevealed] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -49,11 +60,6 @@ function FreightRatesPage() {
   useEffect(() => {
     setRevealed(getRevealState());
   }, []);
-
-  const cities = useMemo(
-    () => ["All", ...Array.from(new Set(branches.map((b) => b.city))), "Delhi"],
-    [branches],
-  );
 
   const [from, setFrom] = useState("All");
   const [to, setTo] = useState("All");
@@ -79,12 +85,12 @@ function FreightRatesPage() {
       <PageHeader
         eyebrow="Freight Rate Dashboard"
         title="Transparent freight indices for major industrial lanes"
-        subtitle="Indicative road freight rates between our branches, updated regularly and adjusted for diesel movement."
+        subtitle="Indicative road freight rates between our branches, updated regularly."
       />
       <section className="container mx-auto px-4 py-12">
-        <div className="grid gap-3 md:grid-cols-5 mb-6">
-          <Filter label="From Branch" value={from} onChange={setFrom} options={cities} />
-          <Filter label="To Branch" value={to} onChange={setTo} options={cities} />
+        <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-5 mb-6">
+          <CitySearch label="From City" value={from} onChange={setFrom} />
+          <CitySearch label="To City" value={to} onChange={setTo} />
           <Filter label="Truck Type" value={truck} onChange={setTruck} options={trucks} />
           <Filter label="Load Type" value={load} onChange={setLoad} options={loadTypes} />
           <div className="grid gap-1.5">
@@ -110,8 +116,7 @@ function FreightRatesPage() {
                   <Th>To</Th>
                   <Th>Vehicle</Th>
                   <Th>Load</Th>
-                  <Th className="text-right">Rate (₹)</Th>
-                  <Th>Diesel Impact</Th>
+                  <Th className="text-right">Rate (₹/Ton)</Th>
                   <Th>Last Updated</Th>
                 </tr>
               </thead>
@@ -143,13 +148,6 @@ function FreightRatesPage() {
                         </span>
                       )}
                     </Masked>
-                    <Masked revealed={revealed} className="text-accent font-mono text-xs">
-                      {revealed ? (
-                        r.dieselImpact
-                      ) : (
-                        <span aria-label="Locked, submit lead form to view">***</span>
-                      )}
-                    </Masked>
                     <Masked revealed={revealed} blur className="text-muted-foreground text-xs">
                       {r.updated}
                     </Masked>
@@ -157,7 +155,7 @@ function FreightRatesPage() {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan={7} className="p-10 text-center text-muted-foreground">
+                    <td colSpan={6} className="p-10 text-center text-muted-foreground">
                       No routes match these filters.
                     </td>
                   </tr>
@@ -190,7 +188,7 @@ function FreightRatesPage() {
 
         <p className="mt-6 text-xs text-muted-foreground">
           Note: Freight rates may vary depending on vehicle availability, load type, route
-          conditions, tolls, and diesel price movement.
+          conditions and tolls.
         </p>
       </section>
 
@@ -206,6 +204,8 @@ function FreightRatesPage() {
     </SiteLayout>
   );
 }
+
+// ---------- sub-components ----------
 
 function Th({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
@@ -266,6 +266,96 @@ function Filter({
           ))}
         </SelectContent>
       </Select>
+    </div>
+  );
+}
+
+/** Searchable city combobox that filters all Indian cities as the user types. */
+function CitySearch({
+  label,
+  value,
+  onChange,
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  const [search, setSearch] = useState("");
+  const ref = useRef<HTMLDivElement>(null);
+
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    if (!q) return INDIAN_CITIES;
+    return INDIAN_CITIES.filter((c) => c.toLowerCase().includes(q));
+  }, [search]);
+
+  // Close on outside click.
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
+
+  const select = (city: string) => {
+    onChange(city);
+    setSearch("");
+    setOpen(false);
+  };
+
+  return (
+    <div className="grid gap-1.5" ref={ref}>
+      <Label className="text-xs uppercase tracking-wide text-muted-foreground">{label}</Label>
+      <div className="relative">
+        <button
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          className="flex w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring"
+        >
+          <span className={value === "All" ? "text-muted-foreground" : ""}>{value}</span>
+          <ChevronDown className="size-4 text-muted-foreground shrink-0" />
+        </button>
+
+        {open && (
+          <div className="absolute z-50 mt-1 w-full rounded-md border border-border bg-popover shadow-lg">
+            {/* search input */}
+            <div className="flex items-center gap-2 border-b border-border px-3 py-2">
+              <Search className="size-3.5 text-muted-foreground shrink-0" />
+              <input
+                autoFocus
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search city…"
+                className="flex-1 bg-transparent text-sm focus:outline-none"
+              />
+              {search && (
+                <button onClick={() => setSearch("")}>
+                  <X className="size-3.5 text-muted-foreground" />
+                </button>
+              )}
+            </div>
+            {/* list */}
+            <div className="max-h-52 overflow-y-auto py-1">
+              {filtered.length === 0 ? (
+                <p className="px-3 py-2 text-xs text-muted-foreground">No cities found.</p>
+              ) : (
+                filtered.map((city) => (
+                  <button
+                    key={city}
+                    type="button"
+                    onClick={() => select(city)}
+                    className={`w-full text-left px-3 py-1.5 text-sm hover:bg-accent/10 ${city === value ? "font-semibold text-accent" : ""}`}
+                  >
+                    {city}
+                  </button>
+                ))
+              )}
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

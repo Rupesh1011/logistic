@@ -123,16 +123,6 @@ export function AdminBranchesTab() {
           { header: "Contact", render: (b) => b.contactPerson },
           { header: "Phone", render: (b) => b.phone },
           { header: "Email", render: (b) => b.email },
-          {
-            header: "Routes",
-            render: (b) => <span className="text-xs text-muted-foreground">{b.routes.length}</span>,
-          },
-          {
-            header: "Industries",
-            render: (b) => (
-              <span className="text-xs text-muted-foreground">{b.industries.length}</span>
-            ),
-          },
         ]}
         onAdd={openAdd}
         onEdit={openEdit}

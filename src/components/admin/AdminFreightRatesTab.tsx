@@ -94,12 +94,7 @@ export function AdminFreightRatesTab() {
           { header: "To", render: (r) => r.to },
           { header: "Vehicle", render: (r) => r.vehicle },
           { header: "Load", render: (r) => r.loadType },
-          {
-            header: "Rate (₹)",
-            render: (r) => `₹${r.rate.toLocaleString("en-IN")}`,
-            className: "text-right font-mono",
-          },
-          { header: "Diesel Impact", render: (r) => r.dieselImpact },
+          { header: "Rate (₹)", render: (r) => `₹${r.rate.toLocaleString("en-IN")}`, className: "text-right font-mono" },
           {
             header: "Updated",
             render: (r) => <span className="text-xs text-muted-foreground">{r.updated}</span>,

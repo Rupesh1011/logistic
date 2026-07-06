@@ -13,7 +13,7 @@ export const Route = createFileRoute("/branches")({
       {
         name: "description",
         content:
-          "Vapi head office and branches in Raipur, Pune and Bhiwandi with contact details and routes served.",
+          "Vapi head office and branches in Raipur, Pune and Bhiwandi with contact details and capabilities.",
       },
     ],
   }),
@@ -53,6 +53,8 @@ function BranchesPage() {
                 </span>
               )}
             </div>
+
+            {/* Contact details */}
             <div className="mt-5 space-y-2 text-sm">
               <p className="flex items-start gap-2 text-muted-foreground">
                 <MapPin className="size-4 mt-0.5 shrink-0" /> {b.address}
@@ -67,21 +69,26 @@ function BranchesPage() {
                 <Mail className="size-4 shrink-0" /> {b.email}
               </p>
             </div>
-            <div className="mt-5 grid md:grid-cols-2 gap-4 border-t border-border pt-5">
-              <div>
-                <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
-                  Key Routes
+
+            {/* Capabilities */}
+            {b.routes.length > 0 && (
+              <div className="mt-5 border-t border-border pt-5">
+                <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-3">
+                  Capabilities
                 </p>
-                <ul className="space-y-1 text-sm">
+                <ul className="space-y-1.5 text-sm">
                   {b.routes.map((r) => (
-                    <li key={r} className="flex items-center gap-2">
-                      <Truck className="size-3.5 text-accent" /> {r}
+                    <li key={r} className="flex items-center gap-2 text-muted-foreground">
+                      <Truck className="size-3.5 text-accent shrink-0" /> {r}
                     </li>
                   ))}
-                  {b.routes.length === 0 && <li className="text-xs text-muted-foreground">—</li>}
                 </ul>
               </div>
-              <div>
+            )}
+
+            {/* Industries as tags (no count) */}
+            {b.industries.length > 0 && (
+              <div className="mt-4">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-accent mb-2">
                   Industries
                 </p>
@@ -94,12 +101,10 @@ function BranchesPage() {
                       {i}
                     </span>
                   ))}
-                  {b.industries.length === 0 && (
-                    <span className="text-xs text-muted-foreground">—</span>
-                  )}
                 </div>
               </div>
-            </div>
+            )}
+
             <div className="mt-6">
               <a
                 href={buildBranchWhatsAppLink({ branchCity: b.city })}

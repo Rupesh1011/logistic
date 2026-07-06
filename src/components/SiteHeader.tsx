@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { Menu, Truck, X } from "lucide-react";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAdminAuth } from "@/hooks/use-admin-auth";
@@ -17,6 +17,7 @@ const nav = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const { isAuthenticated, logout } = useAdminAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="sticky top-0 z-40 bg-card/95 backdrop-blur border-b border-border">
@@ -25,12 +26,9 @@ export function SiteHeader() {
           to="/"
           className="flex items-center gap-2 font-display font-bold text-navy text-lg shrink-0"
         >
-          <span className="size-9 rounded-md bg-navy text-navy-foreground grid place-items-center">
-            <Truck className="size-5" />
-          </span>
+          <LogoMark className="shrink-0" />
           Abhay Road Carrier
-        </Link>
-        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
+        </Link>        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-muted-foreground">
           {nav.map((n) => (
             <Link
               key={n.to}
@@ -51,7 +49,14 @@ export function SiteHeader() {
                   Admin
                 </Button>
               </Link>
-              <Button size="sm" variant="ghost" onClick={logout}>
+              <Button
+                size="sm"
+                variant="ghost"
+                onClick={() => {
+                  logout();
+                  navigate({ to: "/" });
+                }}
+              >
                 Logout
               </Button>
             </>
@@ -91,5 +96,27 @@ export function SiteHeader() {
         </div>
       )}
     </header>
+  );
+}
+
+// Shows the ARC logo if public/arc-logo.png exists, otherwise the Truck icon.
+// Logo has a black background so we display it without any extra container padding.
+function LogoMark({ className }: { className?: string }) {
+  return (
+    <span
+      className={`h-12 w-auto rounded-md overflow-hidden flex items-center ${className ?? ""}`}
+    >
+      <img
+        src="/arc-logo.png"
+        alt="ARC"
+        className="h-12 w-auto object-contain"
+        onError={(e) => {
+          const parent = (e.currentTarget as HTMLImageElement).parentElement;
+          if (!parent) return;
+          parent.innerHTML =
+            '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:#1e3a5f"><path d="M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v3"/><rect x="9" y="11" width="14" height="10" rx="1"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>';
+        }}
+      />
+    </span>
   );
 }

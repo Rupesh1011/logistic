@@ -155,8 +155,22 @@ function FreightRatesPage() {
                 ))}
                 {filtered.length === 0 && (
                   <tr>
-                    <td colSpan={6} className="p-10 text-center text-muted-foreground">
-                      No routes match these filters.
+                    <td colSpan={6} className="p-10 text-center">
+                      <p className="text-muted-foreground font-medium">
+                        No published rates found for this combination.
+                      </p>
+                      <p className="text-sm text-muted-foreground mt-1 mb-4">
+                        We may still be able to help — reach out and our team will send you a custom quote.
+                      </p>
+                      <a
+                        href={`https://wa.me/919033012792?text=${encodeURIComponent("Hi, I'd like a freight rate quote for my route. Could you please help me?")}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 rounded-full bg-[#25D366] text-white px-5 py-2.5 text-sm font-semibold hover:bg-[#1ebe5d] transition-colors"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+                        WhatsApp us for a custom quote
+                      </a>
                     </td>
                   </tr>
                 )}

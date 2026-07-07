@@ -16,15 +16,20 @@ import { useServerDataset } from "@/hooks/use-server-dataset";
 import { freightRates as seedRates, type FreightRate } from "@/data/mock";
 
 const cities = [
-  "Vapi",
-  "Pune",
-  "Bhiwandi",
-  "Raipur",
-  "Mumbai",
-  "Surat",
-  "Ahmedabad",
-  "Nagpur",
-  "Delhi",
+  "Agra", "Ahmedabad", "Ajmer", "Aligarh", "Allahabad", "Amravati", "Amritsar",
+  "Asansol", "Aurangabad", "Bangalore", "Bareilly", "Belgaum", "Bhavnagar",
+  "Bhilai", "Bhiwandi", "Bhopal", "Bhubaneswar", "Bikaner", "Bilaspur", "Bokaro",
+  "Chandigarh", "Chennai", "Coimbatore", "Cuttack", "Dehradun", "Delhi",
+  "Dhanbad", "Durgapur", "Erode", "Faridabad", "Firozabad", "Ghaziabad",
+  "Gorakhpur", "Gulbarga", "Guntur", "Gurgaon", "Guwahati", "Gwalior", "Hubli",
+  "Hyderabad", "Indore", "Jabalpur", "Jaipur", "Jalandhar", "Jammu", "Jamnagar",
+  "Jamshedpur", "Jhansi", "Jodhpur", "Kakinada", "Kalyan", "Kanpur", "Kochi",
+  "Kota", "Kozhikode", "Kolkata", "Lucknow", "Ludhiana", "Madurai", "Meerut",
+  "Mumbai", "Mysore", "Nagpur", "Nashik", "Navi Mumbai", "Nellore", "Noida",
+  "Patna", "Pimpri", "Pune", "Raipur", "Rajkot", "Ranchi", "Salem", "Sangli",
+  "Siliguri", "Solapur", "Srinagar", "Surat", "Thane", "Tiruchirappalli",
+  "Tirunelveli", "Tiruppur", "Ujjain", "Vadodara", "Varanasi", "Vapi",
+  "Vijayawada", "Visakhapatnam", "Warangal",
 ];
 const vehicles = ["14ft Truck", "20ft Container", "32ft SXL", "32ft MXL", "Trailer 40ft"];
 const packaging = ["Loose", "Pallet", "Drum", "Crate", "Bag"];

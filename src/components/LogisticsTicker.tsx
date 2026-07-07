@@ -1,11 +1,10 @@
+// The ticker reads live freight rates from the same dataset the admin edits,
+// so any add/edit/delete in the admin panel automatically updates this banner.
 import { Truck } from "lucide-react";
+import { useServerDataset } from "@/hooks/use-server-dataset";
+import { freightRates as seedRates, type FreightRate } from "@/data/mock";
 
-const tickerItems = [
-  "Freight Index · Vapi → Pune ₹1,850/Ton",
-  "Freight Index · Vapi → Bhiwandi ₹1,100/Ton",
-  "Freight Index · Vapi → Raipur ₹3,650/Ton",
-  "Freight Index · Pune → Raipur ₹3,200/Ton",
-  "Freight Index · Bhiwandi → Vapi ₹1,250/Ton",
+const STATIC_ITEMS = [
   "On-Time Delivery 97.4%",
   "POD Collection 99.5%",
   "Monthly Deliveries 4,200+",
@@ -13,7 +12,17 @@ const tickerItems = [
 ];
 
 export function LogisticsTicker() {
-  const items = [...tickerItems, ...tickerItems];
+  const { value: rates } = useServerDataset<FreightRate[]>("freight-rates", seedRates);
+
+  // Build dynamic items from the live rates dataset (show rate per ton).
+  const rateItems = rates.map(
+    (r) => `Freight Index · ${r.from} → ${r.to} ₹${r.rate.toLocaleString("en-IN")}/Ton`,
+  );
+
+  const allItems = [...rateItems, ...STATIC_ITEMS];
+  // Double for seamless loop.
+  const items = [...allItems, ...allItems];
+
   return (
     <div className="bg-navy text-navy-foreground border-b border-white/10 overflow-hidden">
       <div className="flex items-stretch">
